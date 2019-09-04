@@ -2,5 +2,10 @@
 
 Welcome to my testing and tooling environment !
 
--[ ] Test Github Markdown syntax
--[ ]  
+# Markdown testing area 
+ 
+## False Todo
+
+- [X] List style markdown 
+- [ ]  
+
