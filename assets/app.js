@@ -76,7 +76,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
         // open a dialog with the result if found
         if (resultData !== false) {
-            navigator.vibrate(200); // vibration is not supported on Edge, IE, Opera and Safari
+            //navigator.vibrate(200); // vibration is not supported on Edge, IE, Opera and Safari
             disableUI();
 
             try {
