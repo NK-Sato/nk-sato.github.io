@@ -116,7 +116,7 @@ window.addEventListener('DOMContentLoaded', function () {
         };
         config.video = currentDeviceId ? {deviceId: currentDeviceId} : {facingMode: "environment"};
 
-        //stopStream();
+        stopStream();
 
         navigator.mediaDevices.getUserMedia(config).then(function (stream) {
             document.getElementById('about').style.display = 'none';
