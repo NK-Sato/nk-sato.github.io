@@ -123,9 +123,9 @@ window.addEventListener('DOMContentLoaded', function () {
 
             video.srcObject = stream;
             video.oncanplay = function() {
-                flipCameraButton.disabled = false;
-                calculateSquare();
-                scanCode();
+//                flipCameraButton.disabled = false;
+//                calculateSquare();
+//                scanCode();
             };
         }).catch(function (error) {
             alert(error.name + ": " + error.message);
