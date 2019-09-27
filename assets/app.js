@@ -123,6 +123,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
             video.srcObject = stream;
             video.oncanplay = function() {
+                console.log("oncanplay event");
 //                flipCameraButton.disabled = false;
 //                calculateSquare();
 //                scanCode();
