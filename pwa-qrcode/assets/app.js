@@ -114,7 +114,6 @@ window.addEventListener('DOMContentLoaded', function () {
             audio: false,
             video: {}
         };
-        // TODO : if Async Await method does not work - maybe the config is the problem
         config.video = currentDeviceId ? {deviceId: currentDeviceId} : {facingMode: "environment"};
     
         stopStream();
@@ -122,6 +121,10 @@ window.addEventListener('DOMContentLoaded', function () {
         async function go(){
             const stream = await navigator.mediaDevices.getUserMedia(config);
             video.srcObject=stream;
+            //scan qrcode
+            flipCameraButton.disabled = false;
+            calculateSquare();
+            scanCode();
         }
 
         go().catch(function(err){
@@ -135,7 +138,6 @@ window.addEventListener('DOMContentLoaded', function () {
 //            video.srcObject = stream;
 //
 //            video.oncanplay = function() {
-//                console.log("oncanplay event");
 //                flipCameraButton.disabled = false;
 //                calculateSquare();
 //                scanCode();
