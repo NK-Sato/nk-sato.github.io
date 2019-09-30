@@ -116,17 +116,22 @@ window.addEventListener('DOMContentLoaded', function () {
         };
         config.video = currentDeviceId ? {deviceId: currentDeviceId} : {facingMode: "environment"};
 
+        console.log(config.video);
         stopStream();
 
         navigator.mediaDevices.getUserMedia(config).then(function (stream) {
             document.getElementById('about').style.display = 'none';
 
             video.srcObject = stream;
+
+            video.onloadedmetadata = function(e) {
+                video.play();
+            };
             video.oncanplay = function() {
                 console.log("oncanplay event");
-//                flipCameraButton.disabled = false;
-//                calculateSquare();
-//                scanCode();
+                //                flipCameraButton.disabled = false;
+                //                calculateSquare();
+                //                scanCode();
             };
         }).catch(function (error) {
             alert(error.name + ": " + error.message);
@@ -147,31 +152,31 @@ window.addEventListener('DOMContentLoaded', function () {
 
     // add flip camera button if necessary
     navigator.mediaDevices.enumerateDevices()
-    .then(function(devices) {
-        devices = devices.filter(function (device) {
-            return device.kind === 'videoinput';
-        });
-
-        if (devices.length > 1) {
-            // add a flip camera button
-            flipCameraButton.style.display = "block";
-
-            currentDeviceId = devices[0].deviceId; // no way to know current MediaStream's device id so arbitrarily choose the first
-
-            flipCameraButton.addEventListener('click', function() {
-                let targetDevice;
-                for (let i = 0; i < devices.length; i++) {
-                    if (devices[i].deviceId === currentDeviceId) {
-                        targetDevice = (i + 1 < devices.length) ? devices[i+1] : devices[0];
-                        break;
-                    }
-                }
-                currentDeviceId = targetDevice.deviceId;
-
-                initVideoStream();
+        .then(function(devices) {
+            devices = devices.filter(function (device) {
+                return device.kind === 'videoinput';
             });
-        }
-    });
+
+            if (devices.length > 1) {
+                // add a flip camera button
+                flipCameraButton.style.display = "block";
+
+                currentDeviceId = devices[0].deviceId; // no way to know current MediaStream's device id so arbitrarily choose the first
+
+                flipCameraButton.addEventListener('click', function() {
+                    let targetDevice;
+                    for (let i = 0; i < devices.length; i++) {
+                        if (devices[i].deviceId === currentDeviceId) {
+                            targetDevice = (i + 1 < devices.length) ? devices[i+1] : devices[0];
+                            break;
+                        }
+                    }
+                    currentDeviceId = targetDevice.deviceId;
+
+                    initVideoStream();
+                });
+            }
+        });
 
     document.addEventListener("visibilitychange", function() {
         if (document.hidden) {
