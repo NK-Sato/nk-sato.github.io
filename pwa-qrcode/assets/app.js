@@ -114,24 +114,35 @@ window.addEventListener('DOMContentLoaded', function () {
             audio: false,
             video: {}
         };
+        // TODO : if Async Await method does not work - maybe the config is the problem
         config.video = currentDeviceId ? {deviceId: currentDeviceId} : {facingMode: "environment"};
-
+    
         stopStream();
 
-        navigator.mediaDevices.getUserMedia(config).then(function (stream) {
-            document.getElementById('about').style.display = 'none';
+        async function go(){
+            const stream = navigator.mediaDevices.getUserMedia(config);
+            video.srcObject=stream;
+        }
 
-            video.srcObject = stream;
-
-            video.oncanplay = function() {
-                console.log("oncanplay event");
-                flipCameraButton.disabled = false;
-                calculateSquare();
-                scanCode();
-            };
-        }).catch(function (error) {
-            alert(error.name + ": " + error.message);
+        go().catch(function(err){
+            console.error(err);
         });
+
+
+//        navigator.mediaDevices.getUserMedia(config).then(function (stream) {
+//            document.getElementById('about').style.display = 'none';
+//
+//            video.srcObject = stream;
+//
+//            video.oncanplay = function() {
+//                console.log("oncanplay event");
+//                flipCameraButton.disabled = false;
+//                calculateSquare();
+//                scanCode();
+//            };
+//        }).catch(function (error) {
+//            alert(error.name + ": " + error.message);
+//        });
     }
     initVideoStream();
 
