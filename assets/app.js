@@ -116,8 +116,6 @@ window.addEventListener('DOMContentLoaded', function () {
         };
         config.video = currentDeviceId ? {deviceId: currentDeviceId} : {facingMode: "environment"};
 
-        console.log(config.video);
-        stopStream();
 
         navigator.mediaDevices.getUserMedia(config).then(function (stream) {
             document.getElementById('about').style.display = 'none';
@@ -125,6 +123,7 @@ window.addEventListener('DOMContentLoaded', function () {
             video.srcObject = stream;
 
             video.onloadedmetadata = function(e) {
+                console.log(e.name + ": " + e.message);
                 video.play();
             };
             video.oncanplay = function() {
@@ -135,6 +134,7 @@ window.addEventListener('DOMContentLoaded', function () {
             };
         }).catch(function (error) {
             alert(error.name + ": " + error.message);
+        stopStream();
         });
     }
     initVideoStream();
