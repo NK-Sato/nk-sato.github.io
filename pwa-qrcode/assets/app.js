@@ -120,7 +120,7 @@ window.addEventListener('DOMContentLoaded', function () {
         stopStream();
 
         async function go(){
-            const stream = navigator.mediaDevices.getUserMedia(config);
+            const stream = await navigator.mediaDevices.getUserMedia(config);
             video.srcObject=stream;
         }
 
