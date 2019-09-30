@@ -116,25 +116,21 @@ window.addEventListener('DOMContentLoaded', function () {
         };
         config.video = currentDeviceId ? {deviceId: currentDeviceId} : {facingMode: "environment"};
 
+        stopStream();
 
         navigator.mediaDevices.getUserMedia(config).then(function (stream) {
             document.getElementById('about').style.display = 'none';
 
             video.srcObject = stream;
 
-            video.onloadedmetadata = function(e) {
-                console.log(e.name + ": " + e.message);
-                video.play();
-            };
             video.oncanplay = function() {
                 console.log("oncanplay event");
-                //                flipCameraButton.disabled = false;
-                //                calculateSquare();
-                //                scanCode();
+                flipCameraButton.disabled = false;
+                calculateSquare();
+                scanCode();
             };
         }).catch(function (error) {
             alert(error.name + ": " + error.message);
-        stopStream();
         });
     }
     initVideoStream();
