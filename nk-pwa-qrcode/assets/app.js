@@ -110,7 +110,6 @@ window.addEventListener('DOMContentLoaded', function () {
     // init video stream
     let currentDeviceId;
 
-
     function initVideoStream () {
         let config = {
             audio: false,
@@ -122,8 +121,8 @@ window.addEventListener('DOMContentLoaded', function () {
 
         async function go(){
             const stream = await navigator.mediaDevices.getUserMedia(config);
+            document.getElementById('about').style.display = 'none';
             video.srcObject=stream;
-
         }
 
         go().catch(function(err){
@@ -136,9 +135,7 @@ window.addEventListener('DOMContentLoaded', function () {
             calculateSquare();
             scanCode();
         };
-
-
-
+    
     }
     initVideoStream();
 
