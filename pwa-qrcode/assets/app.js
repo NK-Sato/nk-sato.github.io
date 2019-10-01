@@ -110,15 +110,7 @@ window.addEventListener('DOMContentLoaded', function () {
     // init video stream
     let currentDeviceId;
 
-    async function go(){
-        const stream = await navigator.mediaDevices.getUserMedia(config);
-        video.srcObject=stream;
-        //scan qrcode
-        flipCameraButton.disabled = false;
-        calculateSquare();
-        scanCode();
-    }
-
+    
     function initVideoStream () {
         let config = {
             audio: false,
@@ -127,6 +119,18 @@ window.addEventListener('DOMContentLoaded', function () {
         config.video = currentDeviceId ? {deviceId: currentDeviceId} : {facingMode: "environment"};
 
         stopStream();
+
+async function go(){
+        const stream = await navigator.mediaDevices.getUserMedia(config);
+        video.srcObject=stream;
+
+        //scan qrcode
+        video.oncanplay = function(){
+            flipCameraButton.disabled = false;
+            calculateSquare();
+            scanCode();
+        };
+    }
 
 
         go().catch(function(err){
