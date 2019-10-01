@@ -109,42 +109,44 @@ window.addEventListener('DOMContentLoaded', function () {
 
     // init video stream
     let currentDeviceId;
+
+    async function go(){
+        const stream = await navigator.mediaDevices.getUserMedia(config);
+        video.srcObject=stream;
+        //scan qrcode
+        flipCameraButton.disabled = false;
+        calculateSquare();
+        scanCode();
+    }
+
     function initVideoStream () {
         let config = {
             audio: false,
             video: {}
         };
         config.video = currentDeviceId ? {deviceId: currentDeviceId} : {facingMode: "environment"};
-    
+
         stopStream();
 
-        async function go(){
-            const stream = await navigator.mediaDevices.getUserMedia(config);
-            video.srcObject=stream;
-            //scan qrcode
-            flipCameraButton.disabled = false;
-            calculateSquare();
-            scanCode();
-        }
 
         go().catch(function(err){
             console.error(err);
         });
 
 
-//        navigator.mediaDevices.getUserMedia(config).then(function (stream) {
-//            document.getElementById('about').style.display = 'none';
-//
-//            video.srcObject = stream;
-//
-//            video.oncanplay = function() {
-//                flipCameraButton.disabled = false;
-//                calculateSquare();
-//                scanCode();
-//            };
-//        }).catch(function (error) {
-//            alert(error.name + ": " + error.message);
-//        });
+        //        navigator.mediaDevices.getUserMedia(config).then(function (stream) {
+        //            document.getElementById('about').style.display = 'none';
+        //
+        //            video.srcObject = stream;
+        //
+        //            video.oncanplay = function() {
+        //                flipCameraButton.disabled = false;
+        //                calculateSquare();
+        //                scanCode();
+        //            };
+        //        }).catch(function (error) {
+        //            alert(error.name + ": " + error.message);
+        //        });
     }
     initVideoStream();
 
