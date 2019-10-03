@@ -2,6 +2,10 @@ window.addEventListener('DOMContentLoaded', function() {
   let imgCapture = document.getElementById('imageCapture');
   let canvas = document.getElementById('canvas');
 
+  let versionContainer = document.getElementById('version');
+  let version = '1.0.0';
+  injectVersion();
+
   imgCapture.onchange = function() {
     let files = imgCapture.files;
     files.forEach(c => {
@@ -27,5 +31,9 @@ window.addEventListener('DOMContentLoaded', function() {
     };
 
     reader.readAsDataURL(file);
+  }
+
+  function injectVersion() {
+    versionContainer.innerHTML = version;
   }
 });
