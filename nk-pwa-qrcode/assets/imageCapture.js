@@ -3,7 +3,7 @@ window.addEventListener('DOMContentLoaded', function() {
   let canvas = document.getElementById('canvas');
 
   let versionContainer = document.getElementById('version');
-  let version = '1.0.1';
+  let version = '1.0.2';
   injectVersion();
 
   imgCapture.onchange = function() {
@@ -12,8 +12,8 @@ window.addEventListener('DOMContentLoaded', function() {
       files.forEach(c => {
         drawOnCanvas(c);
       });
-    }else{
-        drawOnCanvas(files[0]);
+    } else {
+      drawOnCanvas(files[0]);
     }
   };
 
@@ -29,6 +29,7 @@ window.addEventListener('DOMContentLoaded', function() {
         canvas.width = img.width;
         canvas.height = img.height;
         ctx.drawImage(img, 0, 0);
+        scanQrCode(ctx, img)
       };
 
       img.src = dataURL;
@@ -39,5 +40,22 @@ window.addEventListener('DOMContentLoaded', function() {
 
   function injectVersion() {
     versionContainer.innerHTML = version;
+  }
+
+  function scanQrCode(snapshotContext, img) {
+    const imageData = snapshotContext.getImageData(
+      0,
+      0,
+      img.width,
+      img.height,
+    );
+
+    // scan for QRCode
+    qrcodeWorker.postMessage({
+      cmd: 'process',
+      width: img.width,
+      height: img.height,
+      imageData: imageData,
+    });
   }
 });
