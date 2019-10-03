@@ -3,7 +3,7 @@ window.addEventListener('DOMContentLoaded', function() {
   let canvas = document.getElementById('canvas');
 
   let versionContainer = document.getElementById('version');
-  let version = '1.0.2';
+  let version = '1.0.3';
   injectVersion();
 
 // init QRCode Web Worker
@@ -63,4 +63,15 @@ window.addEventListener('DOMContentLoaded', function() {
       imageData: imageData,
     });
   }
+
+
+    function showResult (e) {
+        const resultData = e.data;
+
+        // open a dialog with the result if found
+        if (resultData !== false) {
+            alert(resultData);
+        } else {
+        }
+    }
 });
