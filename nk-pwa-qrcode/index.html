@@ -46,12 +46,11 @@
 
         <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
         <script src="assets/app.js"></script>
+        <script src="assets/imageCapture.js"></script>
     </head>
     <body>
 <p>With capture</p>
-<input type="file" accept="image/*" capture>
-        <p>Without capture</p>
-<input type="file" accept="image/*" >
+<input id="imageCapture" type="file" accept="image/*" capture>
 
         <div id="loading" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
                 <video id="camera" autoplay="true" playsinline>You need a camera in order to use this app.</video>
