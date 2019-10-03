@@ -3,7 +3,7 @@ window.addEventListener('DOMContentLoaded', function() {
   let canvas = document.getElementById('canvas');
 
   let versionContainer = document.getElementById('version');
-  let version = '1.0.3';
+  let version = '1.0.4';
   injectVersion();
 
 // init QRCode Web Worker
