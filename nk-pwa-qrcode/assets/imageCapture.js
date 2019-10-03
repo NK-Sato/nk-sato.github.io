@@ -51,15 +51,15 @@ window.addEventListener('DOMContentLoaded', function() {
     const imageData = snapshotContext.getImageData(
       0,
       0,
-      img.size,
-      img.size,
+      img.width,
+      img.height,
     );
 
     // scan for QRCode
     qrcodeWorker.postMessage({
       cmd: 'process',
-      width: img.size,
-      height: img.size,
+      width: img.width,
+      height: img.height,
       imageData: imageData,
     });
   }
