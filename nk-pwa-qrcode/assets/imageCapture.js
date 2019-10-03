@@ -6,10 +6,10 @@ window.addEventListener('DOMContentLoaded', function() {
   let version = '1.0.4';
   injectVersion();
 
-// init QRCode Web Worker
-    const qrcodeWorker = new Worker("assets/qrcode_worker.js");
-    qrcodeWorker.postMessage({cmd: 'init'});
-    qrcodeWorker.addEventListener('message', showResult);
+  // init QRCode Web Worker
+  const qrcodeWorker = new Worker('assets/qrcode_worker.js');
+  qrcodeWorker.postMessage({cmd: 'init'});
+  qrcodeWorker.addEventListener('message', qrcodeResult);
 
   imgCapture.onchange = function() {
     let files = imgCapture.files;
@@ -34,7 +34,7 @@ window.addEventListener('DOMContentLoaded', function() {
         canvas.width = img.width;
         canvas.height = img.height;
         ctx.drawImage(img, 0, 0);
-        scanQrCode(ctx, img)
+        scanQrCode(ctx, img);
       };
 
       img.src = dataURL;
@@ -48,12 +48,7 @@ window.addEventListener('DOMContentLoaded', function() {
   }
 
   function scanQrCode(snapshotContext, img) {
-    const imageData = snapshotContext.getImageData(
-      0,
-      0,
-      img.width,
-      img.height,
-    );
+    const imageData = snapshotContext.getImageData(0, 0, img.width, img.height);
 
     // scan for QRCode
     qrcodeWorker.postMessage({
@@ -64,14 +59,13 @@ window.addEventListener('DOMContentLoaded', function() {
     });
   }
 
+  function qrcodeResult(e) {
+    const resultData = e.data;
 
-    function showResult (e) {
-        const resultData = e.data;
-
-        // open a dialog with the result if found
-        if (resultData !== false) {
-            alert(resultData);
-        } else {
-        }
+    // open a dialog with the result if found
+    if (resultData !== false) {
+      alert(resultData);
+    } else {
     }
+  }
 });
