@@ -3,7 +3,7 @@ window.addEventListener('DOMContentLoaded', function() {
   let canvas = document.getElementById('canvas');
 
   let versionContainer = document.getElementById('version');
-  let version = '1.0.0';
+  let version = '1.0.1';
   injectVersion();
 
   imgCapture.onchange = function() {
@@ -13,7 +13,7 @@ window.addEventListener('DOMContentLoaded', function() {
         drawOnCanvas(c);
       });
     }else{
-        drawOnCanvas(files);
+        drawOnCanvas(files[0]);
     }
   };
 
