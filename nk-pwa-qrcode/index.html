@@ -48,9 +48,13 @@
         <script src="assets/app.js"></script>
     </head>
     <body>
-        <div id="loading" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+<p>With capture</p>
 <input type="file" accept="image/*" capture>
-        <video id="camera" autoplay="true" playsinline>You need a camera in order to use this app.</video>
+        <p>Without capture</p>
+<input type="file" accept="image/*" >
+
+        <div id="loading" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+                <video id="camera" autoplay="true" playsinline>You need a camera in order to use this app.</video>
         <div id="snapshotLimitOverlay">
             <div id="about">
                 <h4>QR Code Scanner</h4>
