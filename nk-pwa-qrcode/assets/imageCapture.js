@@ -6,6 +6,11 @@ window.addEventListener('DOMContentLoaded', function() {
   let version = '1.0.2';
   injectVersion();
 
+// init QRCode Web Worker
+    const qrcodeWorker = new Worker("assets/qrcode_worker.js");
+    qrcodeWorker.postMessage({cmd: 'init'});
+    qrcodeWorker.addEventListener('message', showResult);
+
   imgCapture.onchange = function() {
     let files = imgCapture.files;
     if (files.length > 1) {
@@ -46,15 +51,15 @@ window.addEventListener('DOMContentLoaded', function() {
     const imageData = snapshotContext.getImageData(
       0,
       0,
-      img.width,
-      img.height,
+      img.size,
+      img.size,
     );
 
     // scan for QRCode
     qrcodeWorker.postMessage({
       cmd: 'process',
-      width: img.width,
-      height: img.height,
+      width: img.size,
+      height: img.size,
       imageData: imageData,
     });
   }
