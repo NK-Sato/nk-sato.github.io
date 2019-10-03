@@ -3,7 +3,6 @@ window.addEventListener('DOMContentLoaded', function () {
         'getUserMedia' in navigator.mediaDevices &&
         'Worker' in window)) {
         alert('Sorry, your browser is not compatible with this app.');
-        return;
     }
 
     // html elements
