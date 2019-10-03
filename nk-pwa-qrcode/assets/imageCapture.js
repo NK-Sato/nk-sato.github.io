@@ -8,9 +8,13 @@ window.addEventListener('DOMContentLoaded', function() {
 
   imgCapture.onchange = function() {
     let files = imgCapture.files;
-    files.forEach(c => {
-      drawOnCanvas(c);
-    });
+    if (files.length > 1) {
+      files.forEach(c => {
+        drawOnCanvas(c);
+      });
+    }else{
+        drawOnCanvas(files);
+    }
   };
 
   function drawOnCanvas(file) {
